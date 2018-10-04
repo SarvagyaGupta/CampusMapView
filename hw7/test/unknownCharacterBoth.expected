@@ -1,0 +1,10 @@
+# Find a path with from an unknown character to an unknown character in the shortened
+# Marvel dataset.
+
+# To run this test, you will need to have downloaded the shortMarvel dataset and
+# place it in src/hw7/data/shortMarvel.tsv.
+
+loaded graph shortMarvel
+
+unknown character SARVAGYA
+unknown character CAPTAIN AMERICA

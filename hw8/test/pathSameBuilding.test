@@ -1,0 +1,8 @@
+# Verify that the program finds and correctly outputs the shortest path from
+# CSE to CSE.
+r
+CSE
+CSE
+
+# All of your test scripts should end with q to terminate the program.
+q

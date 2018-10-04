@@ -1,0 +1,8 @@
+# Find a path with from an unknown character to a character in the shortened Marvel dataset.
+
+# To run this test, you will need to have downloaded the shortMarvel dataset and
+# place it in src/hw6/data/shortMarvel.tsv.
+
+loaded graph shortMarvel
+
+unknown character CAPTAIN AMERICA

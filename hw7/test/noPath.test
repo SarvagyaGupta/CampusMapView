@@ -1,0 +1,9 @@
+# Test no path with from a character in the shortened Marvel dataset to
+# a different character in the same set.
+
+# To run this test, you will need to have downloaded the shortMarvel dataset and
+# place it in src/hw7/data/shortMarvel.tsv.
+
+LoadGraph shortMarvel shortMarvel.tsv
+
+FindPath shortMarvel FLASH SPIDER_MAN

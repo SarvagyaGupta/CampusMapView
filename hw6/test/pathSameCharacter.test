@@ -1,0 +1,8 @@
+# Find a path with from a character in the shortened Marvel dataset to the same character.
+
+# To run this test, you will need to have downloaded the shortMarvel dataset and
+# place it in src/hw6/data/shortMarvel.tsv.
+
+LoadGraph shortMarvel shortMarvel.tsv
+
+FindPath shortMarvel FLASH FLASH

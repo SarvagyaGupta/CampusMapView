@@ -1,0 +1,142 @@
+CSE 331 Homework 5.  Answers to Written questions.
+Edit this file to supply your answers.
+
+Name: Sarvagya Gupta
+
+Problem 1. (Written exercises)
+
+(a) IntQueue1 - 
+		Definitions:
+			For a IntQueue1, q, let 
+			elm(q, i) be "q.entries.get(i)", 
+			time(q, i) be "amount of time elm(q, i) has spent in q", and
+			length(q) be "q.entries.size()"
+			
+		Abstraction Function:
+			An IntQueue1, q, represents a First In First Out (FIFO) collection of 
+			Integers stored in entries. If the collection is empty, entries is
+			empty. 			
+			
+		Representation Invariant for every IntQueue1 q:
+			entries != null &&
+			forall i such that (0 <= i < length(q)), elm(q, i) != null &&
+			forall i such that (0 <= i < length(q) - 1), time(q, i) > time(q, i + 1)
+			In other words:
+			* The entries field always points to some usable object.
+			* No term in a IntQueue1 is a non-usable object
+			* The Integers in a IntQueue1 are sorted in descending order of time spent 
+				in the queue
+				
+	IntQueue2 - 
+		Definitions:
+			For a IntQueue2, q, let
+			length(q) be "q.entries.length",
+			elm(q, i) be "q.entries[(q.front + i) % length(q)], and
+			time(q, i) be "amount of time elm(q, i) has spent in q",
+			
+		Abstraction Function:
+			An IntQueue2, q, represents a First In First Out (FIFO) collection of 
+			Integers stored in entries. entries[front] is the first element, and
+			entries[front + size - 1] is the last element in the collection. If the
+			(front + size - 1) exceeds entries.length, the values wrap around.
+			
+		Representation Invariant for every IntQueue1 q:
+			entries != null &&
+			0 <= size < length(q) &&
+			0 <= front < length(q) &&
+			forall i such that (0 <= i < size - 1), time(q, i) > time(q, i + 1)
+			
+			In other words:
+			* The entries field always points to some usable object.
+			* size and front fields are always less than length of the queue
+			* The Integers in a IntQueue2 that are in the valid bounds are sorted in 
+				descending order of time spent in the queue
+		
+
+(b) a. is equivalent to d. and g.
+	b. is equivalent to h.
+	c. is equivalent to f.
+
+
+(c) 1. Will not expose the representation. It is returning an Integer, which is
+		a primitive type, and the user can't get any information of the representation 
+		from this.
+		
+	2. May expose the representation if the programmer doesn't deep copy the String[]
+		before returning it to the client.
+		
+	3. Is a private method and the clients can't call it. Therefore, it can't possibly
+		leak any representation of the code.
+		
+	4. Is a String representation of the object. It doesn't tell in any way how the
+		programmer has implemented their class.
+		
+	5. Gives clients a way to traverse through the collections used in implementing the
+		class but doesn't expose the underlying construction of the object.
+
+
+Problem 2.  (Graph interface/operations)
+	MyGraph - 
+		MyGraph() - Allows user to create an instance of MyGraph.
+		MyGraph addNode(String node) - Allows the client to add a node to the MyGraph.
+		MyGraph addNodes(List<String> nodes) - Allows the client to add multiple nodes at
+				once to the MyGraph.
+		MyGraph removeNode(String node) - Allows the client to remove a node from the MyGraph.
+		MyGraph removeNodes(List<String> nodes) - Allows the client to remove multiple nodes
+				from the MyGraph at once.
+		MyGraph addEdge(String parentNode, DirectedEdge edge) - Allows the client to add an 
+				edge to a node in the MyGraph.
+		MyGraph removeEdge(String parentNode, DirectedEdge edge) - Allows the client to 
+				remove a specific edge from the node in the MyGraph.
+		Set<String> listAllNodes() - Allows the client to view all the nodes in the MyGraph.
+		Set<DirectedEdge> getIncidentEdges(String node) - Allows the client to view all the 
+				incident edges on the given node.
+		boolean isAdjacent(String start, String end) - Allows the client to check if there 
+				is an edge from the start node to the end node.
+		boolean containsNode(String node) - Allows the user to check if the node is present 
+				in the MyGraph.
+				
+		I feel like these are sufficient as the client has all the basic functionalities
+		available to them to manipulate the MyGraph and meet their requirements.
+				
+	DirectedEdge - 
+		DirectedEdge(String label, String destinationNode) - Allows the user to make an instance
+				of an edge.
+		String getLabel() - Allows the client to get the label of the edge.
+		String getDestinationEdge() - Allows the client to the get the destinationEdge of the
+				edge.
+		int compareTo(DirectedEdge other) - Allows the user to compare two edges.
+		boolean equals(Object obj) - Allows the user to check if the object is equal to that
+				instance of DirectedEdge.
+		int hashCode() - Generates a hash code to match the functionality of the equals() method.
+
+		I feel like these methods are enough for an immutable class that is a helper class to
+		the MyGraph. It allows the user to make an edge to add the MyGraph.
+		
+		
+Problem 3.  (Testing strategy)
+	I tested for every possible valid parameter (the one that meets the requires clauses)
+	for every method in MyGraph and DirectedEdge. I then test for all the exceptions that
+	can be thrown by any method in my program.
+
+
+Problem 4.  (Representation)
+	Collection of edges - I considered this option the least. A graph is considered to be
+				a combination of the nodes and edges. If the implementation is only
+				storing the edges, how is one supposed to add nodes that have no edge
+				to/from it (Figure 1, spec)? Also, there is no efficient way to get 
+				the children of the "nodes" in the graph.
+	
+	Adjacency Matrix - This was, according to me, the second best option for the
+				implementation. This has the same problem as it doesn't allow the 
+				vertices with no edges to/from it. This method also uses a lot of
+				space to store the data. Also, it will be really expensive to hide the
+				representation from the user. However, this has a really efficient way
+				to check if there is edge from A to B. But considering all the 
+				"disadvantages", I disregarded this implementation.
+				
+	Adjacency List - This is my implementation of the graph. I chose this as it helps
+				store nodes that have no edges to/from it. Since, I stored edges as an
+				object, it was able to store information, such as destination node, and
+				its label/value. It doesn't occupy as mych space as the matrix and it is
+				not as expensive to hide the representation from the user.

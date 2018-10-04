@@ -1,0 +1,8 @@
+# Find a path with from an unknown character to a character in the shortened Marvel dataset.
+
+# To run this test, you will need to have downloaded the shortMarvel dataset and
+# place it in src/hw7/data/shortMarvel.tsv.
+
+LoadGraph shortMarvel shortMarvel.tsv
+
+FindPath shortMarvel CAPTAIN_AMERICA SPIDER_MAN
